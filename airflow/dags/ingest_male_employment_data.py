@@ -12,12 +12,12 @@ BUCKET = "labor-stats"
 path_to_local_home = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
 
 # constant that points to our first file date
-first_file_date = datetime(2022, 3, 14)
+first_file_date = datetime(2016, 3, 27)
 
 with DAG(
     default_args = {
         "owner": "airflow",
-        "start_date": first_file_date,
+        "start_date": datetime(2022, 1, 1),
         "depends_on_past": False,
         "retries": 1,
     },
@@ -37,6 +37,7 @@ with DAG(
     local_to_s3 = LoadToS3Operator(
         task_id='load_to_s3',
         path_to_local_home=path_to_local_home,
+        filename_prefix='male_employment',
         bucket=BUCKET
     )
 
