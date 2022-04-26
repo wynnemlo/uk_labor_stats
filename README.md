@@ -38,6 +38,7 @@ Now run airflow:
 docker-compose up
 ```
 We should be able to access the web interface for this instance at `http://localhost:8080` in our browser:
-![enter image description here](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/64a6460e-ca4a-47eb-a5e9-33a010290472/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45/20220424/us-west-2/s3/aws4_request&X-Amz-Date=20220424T111705Z&X-Amz-Expires=86400&X-Amz-Signature=8f7be4fc443530e5462579b3d99607a233ad9b817f1824889be8ef45e5a2ebd6&X-Amz-SignedHeaders=host&response-content-disposition=filename%20=%22Untitled.png%22&x-id=GetObject)
+(![Screenshot 2022-04-27 010545](https://user-images.githubusercontent.com/7219284/165354728-524b3e19-82d5-490b-aa12-11ac70ef2691.png)
+)
 
 Now it's time to add our DAGs. We will create a 
