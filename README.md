@@ -61,6 +61,8 @@ They first download the CSVs, uploads them to S3, then some data transformation 
 
 ![image](https://user-images.githubusercontent.com/7219284/165355554-600b0f1c-65aa-4fa7-9a6a-adbef41f783b.png)
 
+Most of the logic is abstracted to custom operators, since all 5 tasks are very similar and can share the same custom operators.
+
 ## Visualization
 The data is then visualized with a BI tool. In this case, I have chosen to use Apache Superset hosted by Preset.
 
