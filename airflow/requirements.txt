@@ -1,0 +1,5 @@
+pyarrow
+boto3
+pandas
+sqlalchemy
+apache-airflow[amazon]
