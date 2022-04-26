@@ -2,7 +2,7 @@
 This is a data engineering project, with the goal of setting up a data pipeline that will ingest labor statistics data from various sources, and keep the data updated at regular intervals. A dashboard is built in the end to visualize the data and for data analysts to derive further insights. You can feel free to adapt this project to collect any other data that requires regular refreshes.
 
 ## Infrastructure
-The infrastructure used in this project are AWS S3 and AWS RDS. AWS offers a [free tier](https://aws.amazon.com/rds/free/) that we can use to experiment with.
+The infrastructure used in this project are AWS S3 and Postgresql database on AWS RDS. AWS offers a [free tier](https://aws.amazon.com/rds/free/) that we can use to experiment with.
 
 ### Set up infrastructure with Terraform
 Instead of setting up my infrastructure manually, Terraform was used. **[Terraform]**(https://www.terraform.io/) is an Infrastructure-as-Code tool that allows us to create, manage, destroy infrastructure through declarative configuration language. It provides support for all the major Cloud service providers like AWS, GCP or Azure.
@@ -63,7 +63,7 @@ They first download the CSVs, uploads them to S3, then some data transformation 
 
 Most of the logic is abstracted to custom operators, since all 5 tasks are very similar and can share the same custom operators.
 
-## Visualization
+## Visualization with Apache Superset
 The data is then visualized with a BI tool. In this case, I have chosen to use Apache Superset hosted by Preset.
 
 The dashboard is connected to the PostgreSQL database and therefore will have the newest data always: https://dc824a2a.us2a.app.preset.io/superset/dashboard/p/82VrgKZlbPz/
