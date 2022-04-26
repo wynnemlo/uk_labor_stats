@@ -20,7 +20,7 @@ class TransformToPostgresOperator(BaseOperator):
     def execute(self, context):
         s3 = S3Hook('s3_conn').get_conn()
         filename = self.xcom_pull(context)
-        obj = s3.get_object(Bucket=self.bucket, Key=f"raw/{filename}")
+        obj = s3.get_object(Bucket=self.bucket, Key=f"raw/{table_name}/{filename}")
         df = pd.read_csv(obj['Body'])
         df = df.drop(df.index[0:7])
         df = df[df["Title"].apply(lambda x: len(x) >= 8)]
