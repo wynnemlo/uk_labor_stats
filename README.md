@@ -40,4 +40,29 @@ docker-compose up
 We should be able to access the web interface for this instance at `http://localhost:8080` in our browser:
 ![Screenshot 2022-04-27 010545](https://user-images.githubusercontent.com/7219284/165354728-524b3e19-82d5-490b-aa12-11ac70ef2691.png)
 
-Now it's time to add our DAGs. We will create a 
+
+### DAGs
+
+There are currently 5 existing DAGs in the repository that pulls data from these respective places:
+- ingest_economic_inactivity_data
+	- https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/economicinactivity/timeseries/lf2m/lms
+- ingest_female_employment_data
+	- https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/timeseries/lf25/lms
+- ingest_male_employment_data
+   - https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/timeseries/mgsv/lms
+- ingest_unemployment_data
+	- https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/unemployment/timeseries/mgsx/lms
+- ingest_wages_data
+	- https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/timeseries/kab9/emp
+
+They are set to run once every month to pull the latest updates from the source. 
+
+They first download the CSVs, uploads them to S3, then some data transformation is done on them before they are inserted into a managed PostgreSQL database.
+
+![image](https://user-images.githubusercontent.com/7219284/165355554-600b0f1c-65aa-4fa7-9a6a-adbef41f783b.png)
+
+## Visualization
+The data is then visualized with a BI tool. In this case, I have chosen to use Apache Superset hosted by Preset.
+
+The dashboard is connected to the PostgreSQL database and therefore will have the newest data always: https://dc824a2a.us2a.app.preset.io/superset/dashboard/p/82VrgKZlbPz/
+(Preset account is required to view)
