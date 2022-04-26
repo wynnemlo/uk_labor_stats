@@ -68,3 +68,6 @@ The data is then visualized with a BI tool. In this case, I have chosen to use A
 
 The dashboard is connected to the PostgreSQL database and therefore will have the newest data always: https://dc824a2a.us2a.app.preset.io/superset/dashboard/p/82VrgKZlbPz/
 (Preset account is required to view)
+
+![image](https://user-images.githubusercontent.com/7219284/165369989-2d49d1c1-3d6e-4296-a6a1-ac4f22f38b51.png)
+
