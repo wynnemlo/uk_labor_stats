@@ -38,7 +38,6 @@ Now run airflow:
 docker-compose up
 ```
 We should be able to access the web interface for this instance at `http://localhost:8080` in our browser:
-(![Screenshot 2022-04-27 010545](https://user-images.githubusercontent.com/7219284/165354728-524b3e19-82d5-490b-aa12-11ac70ef2691.png)
-)
+![Screenshot 2022-04-27 010545](https://user-images.githubusercontent.com/7219284/165354728-524b3e19-82d5-490b-aa12-11ac70ef2691.png)
 
 Now it's time to add our DAGs. We will create a 
