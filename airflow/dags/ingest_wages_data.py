@@ -1,4 +1,3 @@
-import os
 import logging
 from datetime import datetime
 
@@ -6,13 +5,6 @@ from airflow import DAG
 from operators.ons_download_csv_operator import ONSDownloadCSVOperator
 from operators.load_to_s3_operator import LoadToS3Operator
 from operators.transform_to_postgres_operator import TransformToPostgresOperator
-
-# AWS config
-BUCKET = "labor-stats"
-path_to_local_home = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
-
-# constant that points to our first file date
-first_file_date = datetime(2016, 3, 27)
 
 with DAG(
     default_args = {
@@ -27,24 +19,24 @@ with DAG(
     max_active_runs=2,
     tags=['ons_uk'],
 ) as dag:
+    first_file_date = datetime(2016, 3, 27)
+    prefix = "wages"
+
     download_csv_to_local = ONSDownloadCSVOperator(
         task_id='download_csv_to_local',
         first_file_date=first_file_date,
         url_prefix='https://www.ons.gov.uk/generator?format=csv&uri=/employmentandlabourmarket/peopleinwork/earningsandworkinghours/timeseries/kab9/emp/previous/v',
-        filename_prefix='wages'
+        filename_prefix=prefix
     )
 
     local_to_s3 = LoadToS3Operator(
         task_id='load_to_s3',
-        path_to_local_home=path_to_local_home,
-        filename_prefix='wages',
-        bucket=BUCKET
+        filename_prefix=prefix,
     )
 
     transform_to_postgres = TransformToPostgresOperator(
         task_id="transform_to_postgres",
-        bucket=BUCKET,
-        table_name="wages",
+        table_name=prefix,
         field_name="pay"
     )
 

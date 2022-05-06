@@ -1,25 +1,25 @@
+import os
 from airflow.models.baseoperator import BaseOperator
 from airflow.hooks.S3_hook import S3Hook
+from airflow.models import Variable
 
 class LoadToS3Operator(BaseOperator):
     def __init__(
             self, 
-            path_to_local_home,
             filename_prefix,
-            bucket,
             **kwargs) -> None:
-        self.path_to_local_home = path_to_local_home
         self.filename_prefix = filename_prefix
-        self.bucket = bucket
         super().__init__(**kwargs)
 
     def execute(self, context):
+        bucket = Variable.get("bucket")
         filename = self.xcom_pull(context)
+        path_to_local_home = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
         hook = S3Hook('s3_conn')
         hook.load_file(
-            filename=f"{self.path_to_local_home}/{filename}", 
+            filename=f"{path_to_local_home}/{filename}", 
             key=f"raw/{self.filename_prefix}/{filename}",
-            bucket_name=self.bucket,
+            bucket_name=bucket,
             replace=True)
         return filename
     
